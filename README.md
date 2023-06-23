@@ -23,10 +23,12 @@
 git clone https://github.com/victorbusta/test_symfony
 ```
 
-2. Install the dependencies using Composer:
+2. Install the dependencies using Composer and Npm:
 
 ```
 composer install
+npm install && npm run build
+
 ```
 
 3. Run de development database 
@@ -38,6 +40,7 @@ docker compose up --build -d
 4. Load fixtures 
 
 ```
+php bin/console doctrine:schema:create
 php bin/console doctrine:fixtures:load
 ```
 
