@@ -37,7 +37,7 @@ npm install && npm run build
 docker compose up --build -d
 ```
 
-4. Load fixtures 
+4. Create schema and load fixtures
 
 ```
 php bin/console doctrine:schema:create
