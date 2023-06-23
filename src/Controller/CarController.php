@@ -45,7 +45,6 @@ class CarController extends AbstractController
             'pagination' => $pagination,
             'carCategories' => $carCategoryRepository->findAll(),
             'form' => $form->createView(),
-                        // 'temperature' => $temperature,
         ]);
     }
 
