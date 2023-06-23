@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CarCategory{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">CarCategory</h1>
+
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ car_category.id }}</td>
+                </tr>
+                <tr>
+                    <th>Name</th>
+                    <td>{{ car_category.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="my-4">Associated Cars</h2>
+
+        {% if cars is empty %}
+            <p>No associated cars found.</p>
+        {% else %}
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Car Name</th>
+                        <th>Number of Seats</th>
+                        <th>Number of Doors</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for car in cars %}
+                        <tr>
+                            <td>{{ car.name }}</td>
+                            <td>{{ car.nbSeats }}</td>
+                            <td>{{ car.nbDoors }}</td>
+                            <td>{{ car.cost }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+        <a href="{{ path('app_car_category_index') }}" class="btn btn-info">Back to list</a>
+        <a href="{{ path('app_car_category_edit', {'id': car_category.id}) }}" class="btn btn-primary">Edit</a>
+
+        <div class="mt-4">
+            {{ include('car_category/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit CarCategory{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Edit CarCategory</h1>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                {{ include('car_category/_form.html.twig', {'button_label': 'Update'}) }}
+            </div>
+        </div>
+
+        <a href="{{ path('app_car_category_index') }}" class="btn btn-info">Back to list</a>
+
+        <div class="mt-4">
+            {{ include('car_category/_delete_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

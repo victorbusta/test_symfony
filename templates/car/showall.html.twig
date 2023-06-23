@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Car index{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Car index</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>NbSeats</th>
+                    <th>NbDoors</th>
+                    <th>Name</th>
+                    <th>Cost</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for car in cars %}
+                <tr>
+                    <td>{{ car.id }}</td>
+                    <td>{{ car.nbSeats }}</td>
+                    <td>{{ car.nbDoors }}</td>
+                    <td>{{ car.name }}</td>
+                    <td>{{ car.cost }}</td>
+                    <td>
+                        <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-info btn-sm">Show</a>
+                        <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-warning btn-sm">Edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">No records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_car_new') }}" class="btn btn-success">Create new</a>
+        <a href="{{ path('app_resource') }}" class="btn btn-primary btn-block btn-lg mb-4">Resources</a>
+
+    </div>
+{% endblock %}
