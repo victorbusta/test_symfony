@@ -47,8 +47,8 @@ symfony serve
 ```
 
 6. Access the application in your web browser at 
-- `http://localhost:8000`. (shop page)
-- `http://localhost:8000/resource`. (admin page)
+- http://localhost:8000 (shop page)
+- http://localhost:8000/resource (admin page)
 
 
 
