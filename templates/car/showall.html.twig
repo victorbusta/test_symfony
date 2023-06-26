@@ -1,5 +1,100 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Car Index{% endblock %}
+
+{% block body %}
+    <div class="my-4">
+        <h2>Weather</h2>
+        <p>Current Temperature: <span id="temperature"></span>°C</p>
+    </div>
+    <div class="container">
+        <h1 class="my-4">Car Shop</h1>
+
+        <div class="mb-4">
+            {{ form_start(form) }}
+            {{ form_row(form.category) }}
+            {{ form_row(form.name) }}
+            <button type="submit" class="btn btn-primary">Filter</button>
+            {{ form_end(form) }}
+        </div>
+
+        {{ knp_pagination_render(pagination) }}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Number of Seats</th>
+                    <th>Number of Doors</th>
+                    <th>Cost</th>
+                    <th>Show & Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in pagination %}
+                    <tr>
+                        <td>{{ car.id }}</td>
+                        <td>{{ car.name }}</td>
+                        <td>{{ car.carCategory.name }}</td>
+                        <td>{{ car.nbSeats }}</td>
+                        <td>{{ car.nbDoors }}</td>
+                        <td>{{ car.cost }}</td>
+                        <td>
+                            <a href="{{ path('app_car_show', {'id': car.id}) }}" class="btn btn-info">Show</a>
+                            <a href="{{ path('app_car_edit', {'id': car.id}) }}" class="btn btn-warning">Edit</a>
+                        </td>
+                        <td>
+                        {{ include('car/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(pagination) }}
+
+        <a href="{{ path('app_car_new') }}" class="btn btn-success">Create new</a>
+        <a href="{{ path('app_resource') }}" class="btn btn-primary">Resources</a>
+    </div>
+
+    <script>
+        function getWeather() {
+            // Get client coordinates using Geolocation API
+            navigator.geolocation.getCurrentPosition(showWeather);
+        }
+
+        function showWeather(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Get client timezone
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+            // Make AJAX request to fetch weather data
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&hourly=temperature_2m&current_weather=true`);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const temperature = response.current_weather.temperature;
+                    document.getElementById('temperature').textContent = temperature;
+                }
+            };
+            xhr.send();
+        }
+
+        // Retrieve weather immediately and then every hour
+        getWeather();
+        setInterval(getWeather, 60 * 60 * 1000); // Execute every hour (in milliseconds)
+    </script>
+{% endblock %}
+
+{# 
+{% extends 'base.html.twig' %}
+
 {% block title %}Car index{% endblock %}
 
 {% block body %}
@@ -42,4 +137,4 @@
         <a href="{{ path('app_resource') }}" class="btn btn-primary btn-block btn-lg mb-4">Resources</a>
 
     </div>
-{% endblock %}
+{% endblock %} #}

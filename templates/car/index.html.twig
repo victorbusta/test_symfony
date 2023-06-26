@@ -3,12 +3,44 @@
 {% block title %}Car Index{% endblock %}
 
 {% block body %}
+
+    <h1 class="my-4">Car Shop</h1>
+
+
     <div class="my-4">
         <h2>Weather</h2>
-        <p>Current Temperature: <span id="temperature"></span>°C</p>
+        <p>Current Temperature (Paris, France): <span id="temperature"></span>°C</p>
     </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            {% for key, car in pagination %}
+                <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ key }}" {% if key == 0 %}class="active"{% endif %}></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for key, car in pagination %}
+            <div class="carousel-item {% if key == 0 %}active{% endif %} text-center">
+                <div class="carousel-content" style="width: fit-content; transform: translateX(calc(50vw - 50%));">
+                    <h1 style="transform: translateY(110%); width: 100%;" class="bg-black text-white">{{ car.name }}</h1>
+                    <img width="600" height="400" src="https://lh3.googleusercontent.com/fife/APg5EOYtW3hxmDk_Y2hTm18o4p4H_OHvMarUGOJShdEdtUVeO5N6l3H5bh0hYrfjyM9rY6s74H0pS9d2_s3oxtWNp6qFj9P23iPuo9DsM9uzHGAmFxhIsoPxoNcNs43Ub0mXzATevelvHwA6kNMnrwxdZU7Ntgg3hgWfycmFY0vg8p6FQV3YNUs1w4IpJXq_XPiA6mWRoMwJZKGLleiuPKE76BwK-VC0AdFZ2P_B-YAEH05Mf8AuQ0C4kOuAWH6v4U0dxg21th7es33WNrdHv16dh3RNbnGTSVKmaJoeAHteqllhL1VUtU3F9c_5bQzB6j4a72BSMoEFtBWaXzFFyPIh46Ee4CqZ4N3jPMx8CcF3hlFLO2Z6ZxFBcIKQg89yZgCSr5iGK2S9vRJHlpWY38fSpZ0eykcg33mr_T7zoKr2Ip9xm8T6wNJRpFsZH1CeMS_HAI6ljq623wzvi0vIBqrCifKn3Exov7LYIm91I1uxlXl2euW9ypHkuAw1bNj3ZlzzpAeQJuRLVslAknV1s7vTnsHz1olwjRp_LsOfHDDB8-8QjNmpQ_dhGbTTqqcp9EXYA-Tluw7dzOs1E-fWIeBOJhQq4Z5R_ViaLv6_hj5Av2q7r5BbIwfY2VWd4GDqCuwJtTpYQeo8oly91Z5_4Dbm7NxGUo2CB4HDU3la4aeqWipKvXoSJrL6tHRYxAw8UgSyXXvlD6sIc9H57Uw6iixJffumrpnBQfGacDqu2rZFQ0MylrxxvIl-XhUaZsyxUd2bDcpNM2GTI9WPp16Mn6BAJHZx_IK7-4ltoZDO_JB5b3gFWRHYrw8rpwDIAFQqyIXXZbLFU-x6R-JNaOT75UjpTj2rpVmtUI3ZOHaeerkcfWKwgE0vX53gsO5S1Yj7WbuzYJ9d1WNA39J37-jA4Rb5HdbjarKrKRfejSro7109xh6x4asEYQWQXTiw3Bqun90no9GbannS1vxFVnp_9Xlckxtcuit3qJVeP00C96rKoq7YoBymA87hgHbGMDTt8hwjmo6PbiRLKUW5-tTFBSO9xsx7JEKmHVvuwzBlag0g2F-AAyFcC0ZJBA=w1600-h684"
+                    alt="{{ car.name }}" class="img-fluid">
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+
     <div class="container">
-        <h1 class="my-4">Car Shop</h1>
 
         <div class="mb-4">
             {{ form_start(form) }}
@@ -63,7 +95,7 @@
 
             // Make AJAX request to fetch weather data
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&hourly=temperature_2m&current_weather=true`);
+            xhr.open('GET', `https://api.open-meteo.com/v1/forecast?latitude=48.8566&longitude=2.3522&timezone=Europe/Paris&hourly=temperature_2m&current_weather=true`);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
