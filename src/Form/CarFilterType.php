@@ -33,4 +33,3 @@ class CarFilterType extends AbstractType
         ]);
     }
 }
-

@@ -3,8 +3,8 @@
 namespace App\Service;
 
 use App\Entity\Car;
-use App\Form\CarType;
 use App\Form\CarFilterType;
+use App\Form\CarType;
 use App\Repository\CarRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -21,7 +21,8 @@ class CarService
         private PaginatorInterface $paginator,
         private FormFactoryInterface $formFactory,
         private CsrfTokenManagerInterface $csrfTokenManager
-    ) {}
+    ) {
+    }
 
     /**
      * Handles car filtering and pagination.

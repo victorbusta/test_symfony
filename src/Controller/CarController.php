@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Car;
-use App\Service\CarService;
 use App\Repository\CarCategoryRepository;
+use App\Service\CarService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/car')]
 class CarController extends AbstractController
 {
-    public function __construct(private CarService $carService) {}
+    public function __construct(private CarService $carService)
+    {
+    }
 
     /**
      * Lists and filters cars.
@@ -58,7 +60,7 @@ class CarController extends AbstractController
         $formResult = $this->carService->handleCarForm($request);
 
         // If the form is successfully submitted, redirect to the car index page
-        if ($formResult === true) {
+        if (true === $formResult) {
             return $this->redirectToRoute('app_car_all', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -93,7 +95,7 @@ class CarController extends AbstractController
         $formResult = $this->carService->handleCarForm($request, $car);
 
         // If the form is successfully submitted, redirect to the car index page
-        if ($formResult === true) {
+        if (true === $formResult) {
             return $this->redirectToRoute('app_car_all', [], Response::HTTP_SEE_OTHER);
         }
 

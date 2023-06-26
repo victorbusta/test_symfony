@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\CarCategory;
 use App\Service\CarCategoryService;
-use App\Repository\CarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class CarCategoryController extends AbstractController
 {
     // Inject the CarCategoryService via the constructor
-    public function __construct(private CarCategoryService $carCategoryService) {}
+    public function __construct(private CarCategoryService $carCategoryService)
+    {
+    }
 
     // Display all car categories on the index page
     #[Route('/', name: 'app_car_category_index', methods: ['GET'])]

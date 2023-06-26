@@ -22,13 +22,13 @@ class CarFixtures extends Fixture
 
         $manager->flush();
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; ++$i) {
             $car = new Car();
             $car->setName("Car $i");
             $car->setNbSeats(rand(2, 5));
             $car->setNbDoors(4);
             $car->setCost(rand(10000, 50000));
-            $car->setCarCategory($i % 2 === 0 ? $categorybis : $category);
+            $car->setCarCategory(0 === $i % 2 ? $categorybis : $category);
 
             $manager->persist($car);
         }

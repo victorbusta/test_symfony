@@ -19,7 +19,8 @@ class CarCategoryService
         private EntityManagerInterface $entityManager,
         private FormFactoryInterface $formFactory,
         private CsrfTokenManagerInterface $csrfTokenManager
-    ) {}
+    ) {
+    }
 
     // Fetch all car categories from the database
     public function getAllCategories(): array
