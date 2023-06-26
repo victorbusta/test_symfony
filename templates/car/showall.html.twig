@@ -61,21 +61,13 @@
     </div>
 
     <script>
-        function getWeather() {
-            // Get client coordinates using Geolocation API
-            navigator.geolocation.getCurrentPosition(showWeather);
-        }
-
         function showWeather(position) {
             const latitude = position.coords.latitude;
             const longitude = position.coords.longitude;
 
-            // Get client timezone
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
             // Make AJAX request to fetch weather data
             const xhr = new XMLHttpRequest();
-            xhr.open('GET', `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&timezone=${timezone}&hourly=temperature_2m&current_weather=true`);
+            xhr.open('GET', `https://api.open-meteo.com/v1/forecast?latitude=48.8566&longitude=2.3522&timezone=Europe/Paris&hourly=temperature_2m&current_weather=true`);
             xhr.onload = function() {
                 if (xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
